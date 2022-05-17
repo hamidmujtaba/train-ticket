@@ -34,7 +34,7 @@ pipeline {
         stage('Build Images') {
             steps {
                     echo "Docker Building..."
-                    sh 'sudo /usr/local/bin/docker-compose build'
+                    sh 'docker-compose build'
                     echo "Building images Successful!"
             }
         }
