@@ -35,7 +35,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "P3C-PMD"
-                sh "mvn pmd:pmd"
+                sh "mvn -e pmd:pmd"
 
                 echo "Unit Test..."
                 sh 'mvn test'
