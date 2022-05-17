@@ -13,43 +13,62 @@ pipeline {
                 sh 'mvn clean package -Dmaven.test.skip=true'
                 echo "Package Successful!"
 
-                script {
-                    if (env.BRANCH_NAME == 'master') {
-                        echo "Docker Building..."
-                        // sh 'sudo /usr/local/bin/docker-compose build'
-                        echo "Building images Successful!"
+                // script {
+                //     if (env.BRANCH_NAME == 'master') {
+                //         echo "Docker Building..."
+                //         // sh 'sudo /usr/local/bin/docker-compose build'
+                //         echo "Building images Successful!"
 
-                        echo "Pushing images..."
-                        withCredentials([usernamePassword(credentialsId: 'dockerHub-codewisdom', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                            sh "sudo docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
-                            // sh "sudo /bin/bash ./jenkins-ci/image-tag-push.sh"
-                        }
-                        echo "Push Successful"
-                    } else {
-                        echo "This isn't the master branch. Skip the docker building & pushing step!"
-                    }
+                //         echo "Pushing images..."
+                //         withCredentials([usernamePassword(credentialsId: 'dockerHub-codewisdom', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                //             sh "sudo docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+                //             // sh "sudo /bin/bash ./jenkins-ci/image-tag-push.sh"
+                //         }
+                //         echo "Push Successful"
+                //     } else {
+                //         echo "This isn't the master branch. Skip the docker building & pushing step!"
+                //     }
+                // }
+            }
+        }
+
+        stage('Build Images') {
+            script {
+                    echo "Docker Building..."
+                    sh 'sudo /usr/local/bin/docker-compose build'
+                    echo "Building images Successful!"
+
                 }
-            }
         }
+        // stage('Push Images') {
+        //     script {
+        //             echo "Pushing images..."
+        //             withCredentials([usernamePassword(credentialsId: 'dockerHub-codewisdom', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        //                 sh "sudo docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+        //                 // sh "sudo /bin/bash ./jenkins-ci/image-tag-push.sh"
+        //             }
+        //             echo "Push Successful"
+        //         }
+        // }
 
-        stage('Test') {
-            steps {
-                echo "P3C-PMD"
-                sh "mvn -e pmd:pmd"
+        // stage('Test') {
+        //     steps {
+        //         echo "P3C-PMD"
+        //         sh "mvn -e pmd:pmd"
 
-                echo "Unit Test..."
-                sh 'mvn test'
-                echo "Test Successful"
+        //         echo "Unit Test..."
+        //         sh 'mvn test'
+        //         echo "Test Successful"
 	
-                jacoco(
-                    execPattern: '**/target/jacoco.exec',
-                    classPattern: '**/target/classes',
-                    sourcePattern: '**/src/main/java',
-                    exclusionPattern: '**/src/test*',
-                    changeBuildStatus: true
-                )
-            }
-        }
+        //         jacoco(
+        //             execPattern: '**/target/jacoco.exec',
+        //             classPattern: '**/target/classes',
+        //             sourcePattern: '**/src/main/java',
+        //             exclusionPattern: '**/src/test*',
+        //             changeBuildStatus: true
+        //         )
+        //     }
+        // }
 
     }
 	
