@@ -31,14 +31,12 @@ pipeline {
                 // }
             }
         }
-
         stage('Build Images') {
-            script {
+            steps {
                     echo "Docker Building..."
                     sh 'sudo /usr/local/bin/docker-compose build'
                     echo "Building images Successful!"
-
-                }
+            }
         }
         // stage('Push Images') {
         //     script {
@@ -69,9 +67,7 @@ pipeline {
         //         )
         //     }
         // }
-
     }
-	
     post {
         always {
             pmd(canRunOnFailed: true, pattern: '**/target/pmd.xml')
