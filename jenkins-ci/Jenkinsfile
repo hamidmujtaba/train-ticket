@@ -39,12 +39,14 @@ pipeline {
         //     }
         // }
         stage('Push Images') {
+            steps {
                 echo "Pushing images..."
                 withCredentials([usernamePassword(credentialsId: 'dockerHub-hmk', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                    sh "sudo docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
                     // sh "sudo /bin/bash ./jenkins-ci/image-tag-push.sh"
                 }
                 echo "Push Successful"
+            }
         }
 
         // stage('Test') {
