@@ -31,23 +31,21 @@ pipeline {
                 // }
             }
         }
-        stage('Build Images') {
-            steps {
-                    echo "Docker Building..."
-                    sh 'sudo docker-compose build'
-                    echo "Building images Successful!"
-            }
-        }
-        // stage('Push Images') {
-        //     script {
-        //             echo "Pushing images..."
-        //             withCredentials([usernamePassword(credentialsId: 'dockerHub-codewisdom', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-        //                 sh "sudo docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
-        //                 // sh "sudo /bin/bash ./jenkins-ci/image-tag-push.sh"
-        //             }
-        //             echo "Push Successful"
-        //         }
+        // stage('Build Images') {
+        //     steps {
+        //             echo "Docker Building..."
+        //             sh 'sudo docker-compose build'
+        //             echo "Building images Successful!"
+        //     }
         // }
+        stage('Push Images') {
+                echo "Pushing images..."
+                withCredentials([usernamePassword(credentialsId: 'dockerHub-hmk', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                   sh "sudo docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+                    // sh "sudo /bin/bash ./jenkins-ci/image-tag-push.sh"
+                }
+                echo "Push Successful"
+        }
 
         // stage('Test') {
         //     steps {
