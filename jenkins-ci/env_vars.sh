@@ -1,2 +1,4 @@
-export IMG_TAG=latest
-export IMG_REPO=hamidmujtabakhalil
+#!/bin/bash
+
+sudo export IMG_TAG=latest
+sudo export IMG_REPO=hamidmujtabakhalil
