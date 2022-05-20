@@ -44,7 +44,9 @@ pipeline {
         stage('Build Images') { // this works
             steps {
                     echo "Setting environment variables"
-                    sh "source jenkins-ci/env_vars.sh"
+                    sh 'pwd'
+                    sh 'ls'
+                    sh "source ./jenkins-ci/env_vars.sh"
 
                     echo "Docker Building..."
                     sh 'sudo docker-compose build'
