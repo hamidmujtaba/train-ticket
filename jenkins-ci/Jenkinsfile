@@ -44,8 +44,7 @@ pipeline {
         stage('Build Images') { // this works
             steps {
                     echo "Setting environment variables"
-                    sh 'export IMG_TAG=latest'
-                    sh 'export IMG_REPO=hamidmujtabakhalil'
+                    sh 'source ./jenkins-ci/env_vars.sh'
 
                     echo "Docker Building..."
                     sh 'sudo docker-compose build'
