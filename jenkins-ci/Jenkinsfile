@@ -43,11 +43,8 @@ pipeline {
 
         stage('Build Images') { // this works
             steps {
-                    echo "Setting environment variables"
-                    sh "/bin/bash ./jenkins-ci//env_vars.sh"
-
                     echo "Docker Building..."
-                    sh 'sudo docker-compose build'
+                    sh '/bin/bash ./jenkins-ci//env_vars.sh; sudo docker-compose build'
                     echo "Building images Successful!"
             }
         }
