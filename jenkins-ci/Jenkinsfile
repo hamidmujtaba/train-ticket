@@ -46,6 +46,8 @@ pipeline {
                     echo "Setting environment variables"
                     sh 'pwd'
                     sh 'ls'
+                    sh 'cd jenkins-ci'
+                    sh 'ls'
                     sh "source ./jenkins-ci/env_vars.sh"
 
                     echo "Docker Building..."
