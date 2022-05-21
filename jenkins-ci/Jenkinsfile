@@ -52,7 +52,7 @@ pipeline {
                     withEnv(['IMG_TAG=latest', 'IMG_REPO=hamidmujtabakhalil']) {
                         echo "${env.IMG_TAG}"
                         echo "${env.IMG_REPO}"
-                        sh 'sudo docker-compose build'
+                        sh 'docker-compose build'
                         echo "${env.IMG_TAG}"
                         echo "${env.IMG_REPO}"
                         echo "Building images Successful!"
