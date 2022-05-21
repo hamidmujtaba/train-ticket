@@ -1,6 +1,6 @@
 # Codewisdom Train-Ticket system
 
-Repo=codewisdom
+Repo=hamidmujtabakhalil
 Tag=latest
 
 # build image
