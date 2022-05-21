@@ -45,9 +45,13 @@ pipeline {
             steps {
                     echo 'Setting environment variables...'
                     //load "./jenkins-ci/staging_vars.groovy"
+
+                    
                     
                     echo "Docker Building..."
                     withEnv(['IMG_TAG=latest', 'IMG_REPO=hamidmujtabakhalil']) {
+                        echo "${env.IMG_TAG}"
+                        echo "${env.IMG_REPO}"
                         sh 'sudo docker-compose build'
                         echo "${env.IMG_TAG}"
                         echo "${env.IMG_REPO}"
