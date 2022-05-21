@@ -50,11 +50,7 @@ pipeline {
                     
                     echo "Docker Building..."
                     withEnv(['IMG_TAG=latest', 'IMG_REPO=hamidmujtabakhalil']) {
-                        echo "${env.IMG_TAG}"
-                        echo "${env.IMG_REPO}"
                         sh 'docker-compose build'
-                        echo "${env.IMG_TAG}"
-                        echo "${env.IMG_REPO}"
                         echo "Building images Successful!"
                     }
             }
@@ -74,9 +70,9 @@ pipeline {
         stage('Deploy') { // this works
             steps {
                 echo "Deploying latest to EKS..."    
-                echo 'kubectl apply -f ./deployment/kubernetes-manifests/quickstart-k8s/quickstart-ts-deployment-part1.yml'
-                echo 'kubectl apply -f ./deployment/kubernetes-manifests/quickstart-k8s/quickstart-ts-deployment-part2.yml'
-                echo 'kubectl apply -f ./deployment/kubernetes-manifests/quickstart-k8s/quickstart-ts-deployment-part3.yml'
+                sh 'kubectl apply -f ./deployment/kubernetes-manifests/quickstart-k8s/quickstart-ts-deployment-part1.yml'
+                sh 'kubectl apply -f ./deployment/kubernetes-manifests/quickstart-k8s/quickstart-ts-deployment-part2.yml'
+                sh 'kubectl apply -f ./deployment/kubernetes-manifests/quickstart-k8s/quickstart-ts-deployment-part3.yml'
             }
         }
     }
