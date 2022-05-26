@@ -1,6 +1,6 @@
 import os
 
-PREFIX = "codewisdom"
+PREFIX = "hamidmujtabakhalil/dummy-repo"
 VERSION = "0.2.0"
 
 base_path = os.getcwd()
